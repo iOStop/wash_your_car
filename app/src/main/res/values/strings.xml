@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">wash_your_Car</string>
+    <string name="app_name">Wash Your Car</string>
     <string name="facebook_app_id">1703491846637219</string>
 
     <string name="fb_login_protocol_scheme">fb1703491846637219</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="city_pick_hint">Enter your city…</string>
+    <string name="city_pick_btn">Continue</string>
+
+    <string name="shared_prefs_name">shared_prefs_file</string>
+
 </resources>
