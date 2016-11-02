@@ -1,5 +1,8 @@
 package com.iostop.wash_your_car;
 
+import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.Toast;
 
 
 public class SettingsFragment extends Fragment {
@@ -52,13 +57,40 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
-        AutoCompleteTextView textView =
+        final View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+        final AutoCompleteTextView textView =
                 (AutoCompleteTextView) rootView.findViewById(R.id.city_pick_autocompletetextview);
-        String[] cities = new String[]{"Moscow", "Mordovia", "Mordor"};
-        ArrayAdapter<String> arrayAdapter =
+        final String[] cities = new String[]{"Moscow", "Mordovia", "Mordor"};
+        final ArrayAdapter<String> arrayAdapter =
                 new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, cities);
         textView.setAdapter(arrayAdapter);
+
+        //check city and put it to sharedPreferences
+        rootView.findViewById(R.id.city_pick_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String city = textView.getText().toString();
+                if (arrayAdapter.getPosition(city) != -1) {
+                    SharedPreferences sharedPrefs = getActivity()
+                            .getSharedPreferences(getResources()
+                                    .getString(R.string.shared_prefs_name), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor sharedPrefsEditor = sharedPrefs.edit();
+                    sharedPrefsEditor.putString("city", city);
+                    sharedPrefsEditor.apply();
+                    getActivity()
+                            .getFragmentManager()
+                            .beginTransaction()
+                            .setCustomAnimations(android.R.animator.fade_in, R.animator.slide_down)
+                            .remove(SettingsFragment.this)
+                            .commit();
+                }
+                else {
+                    Toast.makeText(getActivity(),
+                            "City not found. Please, check city name.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         return rootView;
     }

@@ -8,4 +8,6 @@
     <string name="city_pick_hint">Enter your city…</string>
     <string name="city_pick_btn">Continue</string>
 
+    <string name="shared_prefs_name">shared_prefs_file</string>
+
 </resources>

@@ -1,5 +1,6 @@
 package com.iostop.wash_your_car;
 
+import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -17,7 +18,6 @@ import com.facebook.login.widget.LoginButton;
 
 
 public class MainActivity extends AppCompatActivity {
-
     CallbackManager callbackManager;
 
 
