@@ -1,4 +1,4 @@
-package com.iostop.wash_your_car;
+package com.iostop.wash_your_car.UI;
 
 import android.content.Context;
 import android.util.AttributeSet;

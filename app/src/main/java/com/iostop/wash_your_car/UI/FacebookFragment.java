@@ -1,4 +1,4 @@
-package com.iostop.wash_your_car;
+package com.iostop.wash_your_car.UI;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,10 +13,11 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.iostop.wash_your_car.R;
 
 public class FacebookFragment extends Fragment {
 
-    interface FacebookListener {
+    public interface FacebookListener {
         void onSuccess();
     }
 

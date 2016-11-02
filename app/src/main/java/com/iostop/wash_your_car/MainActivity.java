@@ -3,21 +3,14 @@ package com.iostop.wash_your_car;
 import android.app.Fragment;
 
 import android.app.FragmentTransaction;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+import com.iostop.wash_your_car.UI.FacebookFragment;
+import com.iostop.wash_your_car.Weather.WeatherService;
 
 
 public class MainActivity extends AppCompatActivity implements FacebookFragment.FacebookListener {
@@ -30,10 +23,10 @@ public class MainActivity extends AppCompatActivity implements FacebookFragment.
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
-        setContentView(R.layout.activity_login);
-        if (facebookFragment == null) {
-            setLoginFragment();
-        }
+        setContentView(R.layout.activity_main);
+//        if (facebookFragment == null) {
+//            setLoginFragment();
+//        }
     }
 
     void setLoginFragment() {
@@ -47,6 +40,12 @@ public class MainActivity extends AppCompatActivity implements FacebookFragment.
         ft.add((Fragment) this.facebookFragment, "FacebookLogin");
         ft.commit();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        WeatherService.start(this);
     }
 
     @Override
