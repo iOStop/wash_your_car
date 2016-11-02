@@ -1,5 +1,7 @@
 package com.iostop.wash_your_car;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,43 +18,39 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FacebookFragment.FacebookListener {
 
-    CallbackManager callbackManager;
-
+    private FacebookFragment facebookFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
-
-        setContentView(R.layout.activity_login);
-
-
         AppEventsLogger.activateApp(this);
-        callbackManager = CallbackManager.Factory.create();
-        View test = (View) findViewById(R.id.login_button);
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // App code
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        // App code
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                    }
-                });
+        setContentView(R.layout.activity_login);
+        if (facebookFragment == null) {
+            setLoginFragment();
+        }
     }
 
+    void setLoginFragment() {
+        this.facebookFragment = new FacebookFragment();
+        facebookFragment.setFacebookListener(this);
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+        ft.add(new Fragment(), "");
+        Fragment fragment = this.facebookFragment;
+        ft.add((Fragment) this.facebookFragment, "FacebookLogin");
+        ft.commit();
+
+    }
+
+    @Override
+    public void onSuccess() {
+
+    }
 
 
 }
