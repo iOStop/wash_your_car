@@ -27,9 +27,11 @@ public class WeatherRest {
         return INSTANCE;
     }
 
-    public WeatherData loadWeather() throws IOException {
+    public WeatherData loadWeather(String city) throws IOException {
 
-        String url = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=169999dbd9284d18b0c221349162910&q=London&format=json&num_of_days=5";
+
+
+        String url = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=169999dbd9284d18b0c221349162910&q=Moscow&format=json&num_of_days=5";
         Request request = (new Request.Builder()).url(url).build();
         Response response = this.HTTP_CLIENT.newCall(request).execute();
 
