@@ -4,6 +4,7 @@ import android.app.Fragment;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -62,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
                     if (intent.getAction().equals(Actions.LOADED.toString())) {
                         String analyzeResult = getApplicationContext().getSharedPreferences("Weather", 0)
                                 .getString("AnalyzeResult", ":)");
+                        String currentDescription = getApplicationContext().getSharedPreferences("Weather", 0)
+                                .getString("CurrentWeather", ":)");
+                        System.out.println(analyzeResult);
                     }
                 }
             }

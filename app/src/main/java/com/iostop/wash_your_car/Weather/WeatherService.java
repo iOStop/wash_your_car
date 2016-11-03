@@ -42,12 +42,19 @@ public class WeatherService extends IntentService {
         try {
             WeatherData weatherData = WeatherRest.getInstance().loadWeather();
             if (weatherData != null) {
+                currentWeatherDescription(weatherData.getCurrent_condition().get(0));
                 analyzeWeather(weatherData);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent((Actions.LOADED.toString())));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    void currentWeatherDescription(WeatherHourly weatherHourly) {
+        String desctiption = weatherHourly.getWeatherDesc().get(0).getValue();
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Weather", 0);
+        sharedPreferences.edit().putString("CurrentWeather", desctiption).apply();
     }
 
     void analyzeWeather(WeatherData weatherData) {
