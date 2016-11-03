@@ -43,24 +43,13 @@ public class MainActivity extends AppCompatActivity {
             setLoginFragment();
         }
 
-        Button washTipBtn = (Button)findViewById(R.id.request_tip_btn);
-        washTipBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences sharedPrefs =
-                        getSharedPreferences("Weather", Context.MODE_PRIVATE);
-                String tip = sharedPrefs
-                        .getString("AnalyzeResult", "No weather data.");
-                String current_weather =
-                        sharedPrefs.getString("CurrentWeather", "No weather data.");
-                TextView forecastTxtView = (TextView) findViewById(R.id.weather_forecast);
-                forecastTxtView.setText(current_weather);
-                TextView washTip = (TextView)findViewById(R.id.wash_tip);
-                washTip.setText(tip);
-
-            }
-        });
-
+//        Button washTipBtn = (Button)findViewById(R.id.request_tip_btn);
+//        washTipBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
     }
 
@@ -89,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
                         String currentDescription = getApplicationContext().getSharedPreferences("Weather", 0)
                                 .getString("CurrentWeather", ":)");
                         System.out.println(analyzeResult);
+
+                        TextView forecastTxtView = (TextView) findViewById(R.id.weather_forecast);
+                        forecastTxtView.setText(currentDescription);
+                        TextView washTip = (TextView)findViewById(R.id.wash_tip);
+                        washTip.setText(analyzeResult);
                     }
                 }
             }
@@ -96,6 +90,14 @@ public class MainActivity extends AppCompatActivity {
 
         IntentFilter intFilt = new IntentFilter(Actions.LOADED.toString());
         LocalBroadcastManager.getInstance(this).registerReceiver(br, intFilt);
+
+//        SharedPreferences sharedPrefs =
+//                getSharedPreferences("Weather", Context.MODE_PRIVATE);
+//        String tip = sharedPrefs
+//                .getString("AnalyzeResult", "Loading...");
+//        String current_weather =
+//                sharedPrefs.getString("CurrentWeather", "Loading...");
+
     }
 
     @Override
