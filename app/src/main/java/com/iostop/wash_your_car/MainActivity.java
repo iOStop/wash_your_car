@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -83,7 +84,11 @@ public class MainActivity extends AppCompatActivity {
             public void onReceive(Context context, Intent intent) {
                 if (intent != null) {
                     if (intent.getAction().equals(Actions.LOADED.toString())) {
-
+                        String analyzeResult = getApplicationContext().getSharedPreferences("Weather", 0)
+                                .getString("AnalyzeResult", ":)");
+                        String currentDescription = getApplicationContext().getSharedPreferences("Weather", 0)
+                                .getString("CurrentWeather", ":)");
+                        System.out.println(analyzeResult);
                     }
                 }
             }

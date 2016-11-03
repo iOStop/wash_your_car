@@ -27,21 +27,20 @@ public class WeatherRest {
         return INSTANCE;
     }
 
-    public Weather loadWeather() throws IOException {
+    public WeatherData loadWeather() throws IOException {
 
-        String url = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=" + "169999dbd9284d18b0c221349162910"
-                +"&q=Moscow&format=json&num_of_days=5";
+        String url = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=169999dbd9284d18b0c221349162910&q=London&format=json&num_of_days=5";
         Request request = (new Request.Builder()).url(url).build();
         Response response = this.HTTP_CLIENT.newCall(request).execute();
 
-        Weather weather;
+        WeatherData weather;
         try {
             if(!response.isSuccessful()) {
                 throw new IOException("Wrong status: " + response.code() + "; body: " + response.body().string());
             }
 
             WeatherResponse weatherResponse = (WeatherResponse)this.gson.fromJson(response.body().string(), WeatherResponse.class);
-            weather = weatherResponse.getData().getWeather().get(0);
+            weather = weatherResponse.getData();
             Log.d("WeatherRest", "load weather: " + weather);
         } finally {
             response.body().close();
