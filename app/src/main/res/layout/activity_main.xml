@@ -26,6 +26,11 @@
         android:textSize="20sp"
         android:text="Loading..."/>
 
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <!--<Button-->
         <!--android:id="@+id/request_tip_btn"-->
         <!--android:text="@string/wash_tip_btn"-->
