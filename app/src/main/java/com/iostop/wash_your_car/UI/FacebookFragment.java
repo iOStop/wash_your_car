@@ -3,14 +3,17 @@ package com.iostop.wash_your_car.UI;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.iostop.wash_your_car.R;
@@ -37,7 +40,15 @@ public class FacebookFragment extends Fragment {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                // App code
+                Toast.makeText(getActivity(), AccessToken.getCurrentAccessToken().toString(), Toast.LENGTH_LONG).show();
+                Log.d("AccessToken:", AccessToken.getCurrentAccessToken().getToken());
+                getActivity().getFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.animator.slide_up, R.animator.slide_down,
+                                R.animator.slide_up, R.animator.slide_down)
+                        .replace(R.id.fragment_container, new SettingsFragment(),
+                                getResources().getString(R.string.city_pick_tag))
+                        .commit();
             }
 
             @Override
