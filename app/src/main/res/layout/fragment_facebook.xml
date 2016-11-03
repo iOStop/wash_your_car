@@ -1,34 +1,37 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.iostop.wash_your_car.UI.FacebookFragment"
-    android:orientation="vertical">
+    tools:context="com.iostop.wash_your_car.UI.FacebookFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="10dp" />
-
-    <TextView
-        android:text="OR"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textView2"
-        android:textSize="14sp"
-        android:textAlignment="center" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#ffffff">
 
-    <TextView
-        android:text="Continue without login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:clickable="true"
-        android:textAlignment="center" />
-</LinearLayout>
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="100dp" />
+
+        <TextView
+            android:id="@+id/textview_or"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_or"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textview_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/continue_without"
+            android:textAlignment="center" />
+    </LinearLayout>
+</FrameLayout>
