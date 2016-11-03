@@ -4,6 +4,7 @@ import android.app.Fragment;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,6 +12,9 @@ import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
@@ -19,6 +23,7 @@ import com.iostop.wash_your_car.UI.FacebookFragment;
 import com.iostop.wash_your_car.Weather.WeatherService;
 import com.iostop.wash_your_car.common.Actions;
 
+import org.w3c.dom.Text;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +41,24 @@ public class MainActivity extends AppCompatActivity {
         if(!isLoggedIn()){
             setLoginFragment();
         }
+
+        Button washTipBtn = (Button)findViewById(R.id.request_tip_btn);
+        washTipBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPrefs =
+                        getSharedPreferences("Weather", Context.MODE_PRIVATE);
+                String tip = sharedPrefs
+                        .getString("AnalyzeResult", "No weather data.");
+                String current_weather =
+                        sharedPrefs.getString("CurrentWeather", "No weather data.");
+                TextView forecastTxtView = (TextView) findViewById(R.id.weather_forecast);
+                forecastTxtView.setText(current_weather);
+                TextView washTip = (TextView)findViewById(R.id.wash_tip);
+                washTip.setText(tip);
+
+            }
+        });
 
 
     }
