@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
             setLoginFragment();
         }
 
-//        Button washTipBtn = (Button)findViewById(R.id.request_tip_btn);
-//        washTipBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        Button settingsBtn = (Button)findViewById(R.id.settings_btn);
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
@@ -98,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
 //        String current_weather =
 //                sharedPrefs.getString("CurrentWeather", "Loading...");
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(br);
     }
 
     @Override
