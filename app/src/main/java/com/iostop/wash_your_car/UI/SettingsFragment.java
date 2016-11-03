@@ -1,6 +1,5 @@
-package com.iostop.wash_your_car;
+package com.iostop.wash_your_car.UI;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,8 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.Toast;
+
+import com.iostop.wash_your_car.R;
 
 
 public class SettingsFragment extends Fragment {

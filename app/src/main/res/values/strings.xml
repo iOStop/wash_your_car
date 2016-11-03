@@ -13,4 +13,6 @@
     <string name="text_or">OR</string>
     <string name="continue_without">Continue without login</string>
     <string name="facebook_tag">FacebookLogin</string>
+    <string name="weather_api_key">169999dbd9284d18b0c221349162910</string>
+
 </resources>

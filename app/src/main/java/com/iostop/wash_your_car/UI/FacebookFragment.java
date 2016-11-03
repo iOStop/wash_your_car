@@ -1,8 +1,6 @@
-package com.iostop.wash_your_car;
+package com.iostop.wash_your_car.UI;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,9 +13,9 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.iostop.wash_your_car.R;
 
 public class FacebookFragment extends Fragment {
-
     CallbackManager callbackManager;
 
 
