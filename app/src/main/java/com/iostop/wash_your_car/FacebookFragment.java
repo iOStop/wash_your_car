@@ -1,12 +1,14 @@
 package com.iostop.wash_your_car;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -16,80 +18,47 @@ import com.facebook.login.widget.LoginButton;
 
 public class FacebookFragment extends Fragment {
 
-    interface FacebookListener {
-        void onSuccess();
-    }
-
-    private FacebookListener facebookListener;
-
-    private OnFragmentInteractionListener mListener;
-
     CallbackManager callbackManager;
 
-    public void setFacebookListener(final FacebookListener facebookListener) {
-        this.facebookListener = facebookListener;
-    }
-
-    public FacebookFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        callbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = (LoginButton) getView().findViewById(R.id.login_button);
-        loginButton.registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // App code
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        // App code
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                    }
-                });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_facebook, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_facebook, container, false);
+        LoginButton loginButton = (LoginButton) rootView.findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email");
+        loginButton.setFragment(this);
+        // Other app specific specialization
+
+        callbackManager = CallbackManager.Factory.create();
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(getActivity(), "Login attempt canceled!", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                Toast.makeText(getActivity(), "Login attempt failed!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-
-        void onFragmentInteraction(Uri uri);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }

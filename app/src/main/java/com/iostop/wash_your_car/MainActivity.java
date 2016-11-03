@@ -3,55 +3,50 @@ package com.iostop.wash_your_car;
 import android.app.Fragment;
 
 import android.app.FragmentTransaction;
-import android.os.PersistableBundle;
+import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 
 
-public class MainActivity extends AppCompatActivity implements FacebookFragment.FacebookListener {
-
-    private FacebookFragment facebookFragment;
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
-        setContentView(R.layout.activity_login);
-        if (facebookFragment == null) {
-            setLoginFragment();
-        }
+        AppEventsLogger.activateApp(getApplication());
+        setContentView(R.layout.activity_main);
+
+        setLoginFragment();
+
     }
 
-    void setLoginFragment() {
-        this.facebookFragment = new FacebookFragment();
-        facebookFragment.setFacebookListener(this);
+    private void setLoginFragment() {
+        FacebookFragment facebookFragment = new FacebookFragment();
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-
-        ft.add(new Fragment(), "");
-        Fragment fragment = this.facebookFragment;
-        ft.add((Fragment) this.facebookFragment, "FacebookLogin");
+        ft.add(R.id.settings_fragment_container, facebookFragment,
+                getResources().getString(R.string.facebook_tag));
         ft.commit();
+
+    }
+    private void setSettingsFragment() {
 
     }
 
     @Override
-    public void onSuccess() {
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment fragment = getFragmentManager()
+                .findFragmentByTag(getResources().getString(R.string.facebook_tag));
+        fragment.onActivityResult(requestCode, resultCode, data);
     }
+
 
 }

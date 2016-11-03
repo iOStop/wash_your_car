@@ -10,4 +10,7 @@
 
     <string name="shared_prefs_name">shared_prefs_file</string>
 
+    <string name="text_or">OR</string>
+    <string name="continue_without">Continue without login</string>
+    <string name="facebook_tag">FacebookLogin</string>
 </resources>
