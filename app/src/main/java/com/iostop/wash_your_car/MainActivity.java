@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
             public void onReceive(Context context, Intent intent) {
                 if (intent != null) {
                     if (intent.getAction().equals(Actions.LOADED.toString())) {
-
+                        String analyzeResult = getApplicationContext().getSharedPreferences("Weather", 0)
+                                .getString("AnalyzeResult", ":)");
                     }
                 }
             }
