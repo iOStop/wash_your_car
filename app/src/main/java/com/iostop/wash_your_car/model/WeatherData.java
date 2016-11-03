@@ -1,12 +1,14 @@
 package com.iostop.wash_your_car.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by Leman on 02.11.16.
  */
 
 public class WeatherData {
-    private CurrentCondition current_condition;
-    private Weather weather;
+    transient private CurrentCondition current_condition;
+    private ArrayList<Weather> weather;
 
     public CurrentCondition getCurrent_condition() {
         return current_condition;
@@ -16,11 +18,11 @@ public class WeatherData {
         this.current_condition = current_condition;
     }
 
-    public Weather getWeather() {
+    public ArrayList<Weather> getWeather() {
         return weather;
     }
 
-    public void setWeather(Weather weather) {
+    public void setWeather(ArrayList<Weather> weather) {
         this.weather = weather;
     }
 }

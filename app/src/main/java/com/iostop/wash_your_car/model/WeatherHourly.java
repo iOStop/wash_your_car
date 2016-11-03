@@ -1,5 +1,7 @@
 package com.iostop.wash_your_car.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by Leman on 02.11.16.
  */
@@ -10,8 +12,8 @@ public class WeatherHourly {
     private String temp_C;
     private String temp_F;
 
-    private WeatherIcon weatherIconUrl;
-    private WeatherDesc weatherDesc;
+    private ArrayList<WeatherIcon> weatherIconUrl;
+    private ArrayList<WeatherDesc> weatherDesc;
 
     public String getTime() {
         return time;
@@ -37,19 +39,19 @@ public class WeatherHourly {
         this.temp_F = temp_F;
     }
 
-    public WeatherIcon getWeatherIconUrl() {
+    public ArrayList<WeatherIcon> getWeatherIconUrl() {
         return weatherIconUrl;
     }
 
-    public void setWeatherIconUrl(WeatherIcon weatherIconUrl) {
+    public void setWeatherIconUrl(ArrayList<WeatherIcon> weatherIconUrl) {
         this.weatherIconUrl = weatherIconUrl;
     }
 
-    public WeatherDesc getWeatherDesc() {
+    public ArrayList<WeatherDesc> getWeatherDesc() {
         return weatherDesc;
     }
 
-    public void setWeatherDesc(WeatherDesc weatherDesc) {
+    public void setWeatherDesc(ArrayList<WeatherDesc> weatherDesc) {
         this.weatherDesc = weatherDesc;
     }
 }

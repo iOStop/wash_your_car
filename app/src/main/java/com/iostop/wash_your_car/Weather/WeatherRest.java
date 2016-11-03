@@ -28,9 +28,10 @@ public class WeatherRest {
     }
 
     public Weather loadWeather() throws IOException {
-        Request request = (new Request.Builder()).url("\n" +
-                "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=" + (R.string.weather_api_key)
-                +"&q=Moscow&format=json&num_of_days=5").build();
+
+        String url = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=" + "169999dbd9284d18b0c221349162910"
+                +"&q=Moscow&format=json&num_of_days=5";
+        Request request = (new Request.Builder()).url(url).build();
         Response response = this.HTTP_CLIENT.newCall(request).execute();
 
         Weather weather;
@@ -40,7 +41,7 @@ public class WeatherRest {
             }
 
             WeatherResponse weatherResponse = (WeatherResponse)this.gson.fromJson(response.body().string(), WeatherResponse.class);
-            weather = weatherResponse.getData().getWeather();
+            weather = weatherResponse.getData().getWeather().get(0);
             Log.d("WeatherRest", "load weather: " + weather);
         } finally {
             response.body().close();
