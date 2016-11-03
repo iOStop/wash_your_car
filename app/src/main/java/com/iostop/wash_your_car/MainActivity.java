@@ -12,6 +12,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.iostop.wash_your_car.UI.FacebookFragment;
@@ -32,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
         AppEventsLogger.activateApp(getApplication());
         setContentView(R.layout.activity_main);
 
-        setLoginFragment();
+        if(!isLoggedIn()){
+            setLoginFragment();
+        }
+
 
     }
 
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         FacebookFragment facebookFragment = new FacebookFragment();
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.add(R.id.settings_fragment_container, facebookFragment,
+        ft.add(R.id.fragment_container, facebookFragment,
                 getResources().getString(R.string.facebook_tag));
         ft.commit();
 
@@ -74,5 +78,8 @@ public class MainActivity extends AppCompatActivity {
         fragment.onActivityResult(requestCode, resultCode, data);
     }
 
+    public boolean isLoggedIn(){
+        return AccessToken.getCurrentAccessToken() != null;
+    }
 
 }
