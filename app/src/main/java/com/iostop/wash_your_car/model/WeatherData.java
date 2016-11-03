@@ -7,14 +7,14 @@ import java.util.ArrayList;
  */
 
 public class WeatherData {
-    private ArrayList<CurrentCondition> current_condition;
+    private ArrayList<WeatherHourly> current_condition;
     private ArrayList<Weather> weather;
 
-    public ArrayList<CurrentCondition> getCurrent_condition() {
+    public ArrayList<WeatherHourly> getCurrent_condition() {
         return current_condition;
     }
 
-    public void setCurrent_condition(ArrayList<CurrentCondition> current_condition) {
+    public void setCurrent_condition(ArrayList<WeatherHourly> current_condition) {
         this.current_condition = current_condition;
     }
 
