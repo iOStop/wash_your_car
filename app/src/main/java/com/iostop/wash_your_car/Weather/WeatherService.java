@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 
+import com.iostop.wash_your_car.R;
 import com.iostop.wash_your_car.common.Actions;
 import com.iostop.wash_your_car.model.Weather;
 import com.iostop.wash_your_car.model.WeatherData;
@@ -40,7 +41,10 @@ public class WeatherService extends IntentService {
 
     private void handleIntent(Intent intent) {
         try {
-            WeatherData weatherData = WeatherRest.getInstance().loadWeather();
+            String city = getApplicationContext().getSharedPreferences(getResources()
+                    .getString(R.string.shared_prefs_name), Context.MODE_PRIVATE)
+                    .getString("city", "Moscow");
+            WeatherData weatherData = WeatherRest.getInstance().loadWeather(city);
             if (weatherData != null) {
                 currentWeatherDescription(weatherData.getCurrent_condition().get(0));
                 analyzeWeather(weatherData);
